@@ -271,6 +271,7 @@ network_epidemic<-function(g,betaS,betaAS,num_introductions,VE,rel_VE_PI,hr,lr,d
     
     if (VT == "aon"){
       r_nodes_nv <- r_nodes_s
+      r_nodes_v <- data.frame()
     } else if (VT == "leaky"){ 
       r_nodes_nv <- intersect(r_nodes_s,V(g)[which(V(g)$trialstatus==0)]$name)
       r_nodes_v <- intersect(r_nodes_s,V(g)[which(V(g)$trialstatus==1)]$name)
