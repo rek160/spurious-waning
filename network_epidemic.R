@@ -268,8 +268,13 @@ network_epidemic<-function(g,betaS,betaAS,num_introductions,VE,rel_VE_PI,hr,lr,d
     # which recovered nodes eligible for reinfection 
     r_nodes_reinf <- t > (r_nodes[2,] + days_reinf) 
     r_nodes_s <-as.vector(r_nodes[1,r_nodes_reinf]) # those susceptible again
-    r_nodes_nv <- intersect(r_nodes_s,V(g)[which(V(g)$trialstatus==0)]$name)
-    r_nodes_v <- intersect(r_nodes_s,V(g)[which(V(g)$trialstatus==1)]$name)
+    
+    if (VT == "aon"){
+      r_nodes_nv <- r_nodes_s
+    } else if (VT == "leaky"){ 
+      r_nodes_nv <- intersect(r_nodes_s,V(g)[which(V(g)$trialstatus==0)]$name)
+      r_nodes_v <- intersect(r_nodes_s,V(g)[which(V(g)$trialstatus==1)]$name)
+    }
     
     if (ncol(iS_nodes)>0) {
       # Get a list of all neighbours of all infected symptomatic nodes
