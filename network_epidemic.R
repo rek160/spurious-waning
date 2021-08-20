@@ -701,8 +701,7 @@ network_epidemic<-function(g,betaS,betaAS,num_introductions,VE,rel_VE_PI,hr,lr,d
           new_vacc_aon <- sample(new_vacc,length(new_vacc)*direct_VE,replace=FALSE)
           vacc_aon <- intersect(s_nodes,new_vacc_aon)
           s_nodes <- setdiff(s_nodes,vacc_aon)
-          r_nodes <- cbind(r_nodes,rbind(vacc_aon,rep(-1000,length(vacc_aon)))) # setting to -1000 so never become susceptible again
-          # if run simulations with a lot of prior infection need to make vaccinated have -1000 as well but for now just testing aon with no prior infection
+          r_nodes <- cbind(r_nodes,rbind(vacc_aon,rep(1000,length(vacc_aon)))) # make 1000 so never get infected again
           nonvacc_susc <- intersect(s_nodes,new_controls)
           nv_nodes <- c(nv_nodes,nonvacc_susc)
         }
